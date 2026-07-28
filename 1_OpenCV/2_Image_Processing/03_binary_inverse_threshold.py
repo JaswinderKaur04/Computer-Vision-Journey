@@ -7,6 +7,8 @@
 # Object → White (255)
 # Background → Black (0)
 
+# Pixel > threshold → 0 (black)
+# Pixel ≤ threshold → 255 (white)
 
 import cv2
 

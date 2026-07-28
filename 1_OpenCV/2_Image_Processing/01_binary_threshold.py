@@ -1,3 +1,7 @@
+# A threshold is a cutoff point or boundary used to make a decision.
+# We use thresholding in image processing to separate important objects from the background. 
+# Pixel > threshold → 255 (white)
+# Pixel ≤ threshold → 0 (black)
 import cv2
 
 img = cv2.imread("cat.jpg")

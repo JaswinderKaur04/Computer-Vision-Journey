@@ -1,22 +1,31 @@
 import cv2
 
 img = cv2.imread("cat.jpg")
+gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
 
-_,thres = cv2.threshold(
-    img,
-    127,
+threshold_value,threshold = cv2.threshold(
+    gray,
+    150,
     255,
     cv2.THRESH_BINARY
 )
 
-_,thres_inv = cv2.threshold(
-    img,
-    127,
+threshold_value,inv = cv2.threshold(
+    gray,
+    150,
     255,
     cv2.THRESH_BINARY_INV
 )
+threshold_value,trunc = cv2.threshold(
+    gray,
+    150,
+    255,
+    cv2.THRESH_TRUNC
+)
 
-cv2.imshow("image with threshold",thres)
-cv2.imshow("image with threshold inverse",thres_inv)
+print(threshold_value)
+cv2.imshow("threhold image",threshold)
+cv2.imshow("myimage",gray)
+cv2.imshow("myimage inverse",inv)
+cv2.imshow("myimage trunc",trunc)
 cv2.waitKey(0)
-cv2.destroyAllWindows()
