@@ -41,13 +41,13 @@ _, thresh = cv2.threshold(
     255,
     cv2.THRESH_BINARY
 )
-2. Binary Threshold Experiment
+**2. Binary Threshold Experiment**
 
 Experimented with different threshold values to understand how changing the threshold affects the resulting image.
 
 Low threshold  → More white pixels
 High threshold → More black pixels
-3. Binary Inverse Thresholding
+**3. Binary Inverse Thresholding**
 
 Binary inverse thresholding produces the opposite result of normal binary thresholding.
 
@@ -64,7 +64,7 @@ Bright → White
 Binary Inverse:
 Dark  → White
 Bright → Black
-4. Truncation Thresholding
+**4. Truncation Thresholding**
 
 THRESH_TRUNC limits pixel intensities above the specified threshold.
 
@@ -90,7 +90,7 @@ Blurring is used to reduce noise and smooth an image.
 
 It is also useful as a preprocessing step before edge detection and thresholding.
 
-5. Gaussian Blur
+**5. Gaussian Blur**
 
 Gaussian Blur smooths an image using a Gaussian kernel.
 
@@ -105,7 +105,7 @@ Applications:
 Noise reduction
 Image smoothing
 Preprocessing before edge detection
-6. Blur Before Thresholding
+**6. Blur Before Thresholding**
 
 Blurring an image before thresholding can reduce small noise and produce a cleaner binary image.
 
@@ -120,7 +120,7 @@ Gaussian Blur
 Thresholding
       ↓
 Binary Image
-7. Median Blur
+**7. Median Blur**
 
 Median Blur replaces each pixel with the median value of its neighborhood.
 
@@ -131,7 +131,7 @@ median = cv2.medianBlur(
 
 It is particularly useful for reducing salt-and-pepper noise while preserving edges better than some simple averaging methods.
 
-8. Bilateral Filtering
+**8. Bilateral Filtering**
 
 Bilateral filtering smooths an image while preserving important edges.
 
@@ -150,7 +150,7 @@ Intensity difference
 This allows it to reduce noise while maintaining edges.
 
 📐 Edge Detection
-9. Canny Edge Detection
+**9. Canny Edge Detection**
 
 Canny Edge Detection identifies strong intensity changes in an image.
 
@@ -176,8 +176,8 @@ Edge Image
 
 Canny is useful for detecting object boundaries and structural features.
 
-🔍 Contour Detection
-10. Contours
+**🔍 Contour Detection
+10. Contours**
 
 A contour represents the boundary or outline of an object.
 
@@ -205,7 +205,7 @@ Object detection
 Shape analysis
 Object measurement
 Finding object boundaries
-🔄 Image Processing Pipeline
+**🔄 Image Processing Pipeline**
 
 The concepts in this module can be combined into a typical Computer Vision preprocessing pipeline:
 
@@ -241,7 +241,7 @@ Object / Shape Analysis
 Python
 OpenCV
 NumPy
-📚 What I Learned
+**📚 What I Learned**
 
 Through this module, I learned how to:
 
