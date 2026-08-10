@@ -1,181 +1,219 @@
-# 📊 Histograms — OpenCV
+# 🖼️ Image Processing — OpenCV
 
-This module covers image histograms and intensity analysis using OpenCV and Python.
+> Exploring fundamental image processing techniques using Python and OpenCV.
 
-A histogram represents the distribution of pixel intensity values in an image. It helps analyze image brightness, contrast, color distribution, and selected regions of an image.
+---
 
-## 🎯 Learning Objectives
+## 🧭 Overview
 
-- Understand pixel intensity
-- Understand grayscale histograms
-- Understand histogram bins and intensity ranges
-- Analyze image brightness and contrast using histograms
-- Create color histograms using BGR channels
-- Apply histogram equalization
-- Perform contrast stretching
-- Calculate histograms for selected image regions using masks
+Image processing is an important foundation of Computer Vision.
 
-## 🧠 Key Concepts
+In this module, I worked with techniques used to preprocess images, reduce noise, detect edges, identify objects, and extract useful information from images.
 
-### 1. Pixel Intensity
+---
 
-For an 8-bit grayscale image, pixel intensity ranges from:
+## 🎯 What I Learned
+
+| Topic | What I Learned |
+|---|---|
+| Thresholding | Converting images into binary representations |
+| Binary Threshold | Separating pixels using a threshold value |
+| Binary Inverse | Creating the inverse of a binary image |
+| Truncation | Limiting pixel intensity values |
+| Gaussian Blur | Smoothing images and reducing noise |
+| Median Blur | Removing noise while preserving edges |
+| Bilateral Filter | Smoothing while preserving important edges |
+| Canny Edge Detection | Detecting edges in images |
+| Contours | Detecting and analyzing object boundaries |
+
+---
+
+## 🧠 Core Concepts
+
+### 1. Thresholding
+
+Thresholding separates pixels based on their intensity values.
+
+For binary thresholding:
 
 ```text
-0 → Black
-255 → White
-
-Intensity represents the brightness value of a pixel.
-
-2. Grayscale Histogram
-
-A grayscale histogram counts how many pixels have each intensity value.
-
-X-axis → Pixel Intensity
-Y-axis → Number of Pixels
-
-A histogram helps identify whether an image is generally dark, bright, or has low/high contrast.
-
-3. Histogram Bins
-
-Bins are groups used to organize intensity values.
-
-For an 8-bit grayscale image:
-
-[256]
-
-creates 256 bins, allowing each intensity value from 0 to 255 to be represented separately.
-
-Using fewer bins, such as 16, groups multiple intensity values together and produces a less detailed histogram.
-
-4. Intensity Range
-
-The full grayscale intensity range is:
-
-[0, 256]
-
-OpenCV treats the upper boundary as exclusive, so the actual intensity values are:
-
-0 → 255
-
-The number of bins and the intensity range are different concepts:
-
-[256]      → Number of bins
-[0, 256]   → Intensity range
-🎨 Color Histogram
-
-OpenCV stores color images in BGR order:
-
-Channel 0 → Blue
-Channel 1 → Green
-Channel 2 → Red
-
-Separate histograms can be calculated for each channel.
+Pixel < Threshold  → 0
+Pixel ≥ Threshold  → 255
 
 Example:
 
-blue_hist = cv2.calcHist([img], [0], None, [256], [0, 256])
-green_hist = cv2.calcHist([img], [1], None, [256], [0, 256])
-red_hist = cv2.calcHist([img], [2], None, [256], [0, 256])
+_, thresh = cv2.threshold(
+    gray,
+    127,
+    255,
+    cv2.THRESH_BINARY
+)
+2. Binary Inverse Thresholding
 
-A color histogram helps analyze the distribution of individual color-channel intensities.
+Binary inverse thresholding produces the opposite result of normal binary thresholding.
 
-🔧 cv2.calcHist()
+Binary:
 
-Basic syntax:
+Dark   → Black
+Bright → White
 
-cv2.calcHist(
-    images,
-    channels,
-    mask,
-    histSize,
-    ranges
+
+Binary Inverse:
+
+Dark   → White
+Bright → Black
+3. Truncation Thresholding
+
+THRESH_TRUNC limits pixel values above the specified threshold.
+
+_, trunc = cv2.threshold(
+    gray,
+    127,
+    255,
+    cv2.THRESH_TRUNC
 )
 
-Example:
+Pixels above the threshold are set to the threshold value.
 
-hist = cv2.calcHist(
-    [gray],
-    [0],
-    None,
-    [256],
-    [0, 256]
-)
-Parameters
-Parameter	Meaning
-images	Image to analyze
-channels	Channel to calculate the histogram for
-mask	Region to analyze; None means the whole image
-histSize	Number of bins
-ranges	Intensity range
-📈 Histogram Equalization
+🌫️ Image Filtering
 
-Histogram equalization improves image contrast by redistributing pixel intensities.
+Filtering is used to smooth images and reduce unwanted noise.
 
-equalized = cv2.equalizeHist(gray)
-
-It is useful when intensity values are concentrated in a limited range.
-
-🔄 Contrast Stretching
-
-Contrast stretching expands a limited intensity range to a wider range, commonly:
-
-Original range → 0–255
-
-For example:
-
-50 → 0
-180 → 255
-
-This can improve the visibility of image details.
-
-🎭 Histogram Masking
-
-A mask can be used to calculate a histogram for only a specific region of an image.
-
-hist = cv2.calcHist(
-    [gray],
-    [0],
-    mask,
-    [256],
-    [0, 256]
+Gaussian Blur
+blur = cv2.GaussianBlur(
+    img,
+    (5, 5),
+    0
 )
 
-With:
+Useful for:
 
-mask = None
+Noise reduction
+Image smoothing
+Preprocessing before edge detection
+Median Blur
 
-the histogram is calculated for the entire image.
+Median filtering replaces a pixel with the median value of its neighborhood.
 
-With a binary mask, the histogram can be calculated only for the selected region.
+median = cv2.medianBlur(
+    img,
+    5
+)
 
+It is particularly useful for reducing salt-and-pepper noise.
+
+Bilateral Filtering
+
+Bilateral filtering smooths an image while preserving important edges.
+
+bilateral = cv2.bilateralFilter(
+    img,
+    9,
+    75,
+    75
+)
+
+It considers both:
+
+Spatial distance
+Intensity difference
+📐 Canny Edge Detection
+
+Canny Edge Detection identifies strong changes in pixel intensity.
+
+edges = cv2.Canny(
+    gray,
+    100,
+    200
+)
+
+Basic pipeline:
+
+Image
+  ↓
+Grayscale
+  ↓
+Noise Reduction
+  ↓
+Gradient
+  ↓
+Edge Detection
+  ↓
+Edge Image
+
+Canny is useful for detecting object boundaries and structural features.
+
+🔍 Contour Detection
+
+Contours represent the boundaries or outlines of objects.
+
+contours, hierarchy = cv2.findContours(
+    edges,
+    cv2.RETR_EXTERNAL,
+    cv2.CHAIN_APPROX_SIMPLE
+)
+
+Contours can then be drawn using:
+
+cv2.drawContours(
+    img,
+    contours,
+    -1,
+    (0, 255, 0),
+    2
+)
+
+Contours are useful for:
+
+Object detection
+Shape analysis
+Object measurement
+Boundary detection
+🔄 Image Processing Pipeline
+
+The techniques in this module can be combined into a typical preprocessing pipeline:
+
+Input Image
+     ↓
+Grayscale Conversion
+     ↓
+Noise Reduction
+     ↓
+Thresholding
+     ↓
+Edge Detection
+     ↓
+Contour Detection
+     ↓
+Object / Shape Analysis
 📂 Project Structure
-4_Histograms/
+2_Image_Processing/
 │
-├── images/
-│   └── cat.jpg
-│
-├── 01_grayscale_histogram.py
-├── 02_histogram_bins.py
-├── 03_color_histogram.py
-├── 04_histogram_equalization.py
-├── 05_contrast_stretching.py
-├── 06_histogram_mask.py
+├── 01_binary_threshold.py
+├── 02_binary_threshold_experiment.py
+├── 03_binary_inverse_threshold.py
+├── 04_trunc_threshold.py
+├── 05image_GaussianBlur.py
+├── 06_blur_before_threshold.py
+├── 07_median_blur.py
+├── 08_bilateral_filter.py
+├── 09_canny_edge_detection.py
+├── 10_contours.py
+├── practice.py
 └── README.md
-🛠️ Technologies Used
-Python
-OpenCV
-NumPy
-Matplotlib
-📚 What I Learned
+🛠️ Technologies
+🐍 Python
+👁️ OpenCV
+🔢 NumPy
+💡 Key Takeaways
 
 Through this module, I learned how to:
 
-Analyze pixel intensity distributions
-Create and interpret grayscale histograms
-Work with histogram bins and intensity ranges
-Analyze BGR color channels separately
-Improve image contrast using histogram equalization
-Stretch intensity values to improve contrast
-Analyze selected image regions using masks
-```
+Work with pixel intensity values
+Apply different thresholding techniques
+Create binary and inverse binary images
+Reduce image noise using different filters
+Compare Gaussian, Median, and Bilateral filtering
+Detect edges using Canny
+Detect and visualize object contours
+Build basic image preprocessing pipelines
