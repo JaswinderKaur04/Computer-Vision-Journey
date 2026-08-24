@@ -2,7 +2,9 @@ import cv2
 import matplotlib.pyplot as plt
 
 # Read image
-img = cv2.imread("cat.jpg")
+img = cv2.imread("cat.jpg") 
+print(img.min())
+print(img.max())
 
 # Convert to grayscale
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)

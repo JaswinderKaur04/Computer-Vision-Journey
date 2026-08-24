@@ -20,3 +20,9 @@ plt.ylabel("Number of Pixels")
 plt.legend()
 
 plt.show()
+
+# The label= gives a name to each plot, and:
+
+# plt.legend()
+
+# displays those names on the graph.
