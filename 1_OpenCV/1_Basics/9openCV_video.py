@@ -4,7 +4,8 @@ cap = cv2.VideoCapture(0)
 
 while True:
     ret, frame = cap.read()
-    cv2.imshow("Webcam", frame)
+    gray = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
+    cv2.imshow("Webcam", gray)
 
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break

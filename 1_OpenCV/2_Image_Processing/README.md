@@ -1,4 +1,58 @@
-# 🖼️ Image Processing — OpenCV
+🖼️ Image Processing — OpenCV
+
+
+# 2. Image Processing
+
+This section covers fundamental image processing techniques using OpenCV.
+
+## Topics Covered
+
+### 1. Thresholding
+
+- Binary Thresholding
+- Binary Inverse Thresholding
+- Threshold Experiments
+- Threshold Value Tuning
+
+### 2. Image Blurring
+
+- Gaussian Blur
+- Blur Before Thresholding
+- Median Blur
+- Bilateral Filter
+
+### 3. Edge Detection
+
+- Canny Edge Detection
+
+### 4. Contours
+
+- Contour Detection
+- Basic Contour Analysis
+
+## Learning Progress
+
+- [X] Binary Thresholding
+- [X] Binary Inverse Thresholding
+- [X] Threshold Experiments
+- [X] Gaussian Blur
+- [X] Blur Before Thresholding
+- [X] Median Blur
+- [X] Bilateral Filter
+- [X] Canny Edge Detection
+- [X] Contours
+- [ ] Mini Image Processing Proje
+
+```
+```
+
+>>>>>>> Stashed changes
+>>>>>>>
+>>>>>>
+>>>>>
+>>>>
+>>>
+>>
 
 > A practical exploration of fundamental image processing techniques using Python and OpenCV.
 

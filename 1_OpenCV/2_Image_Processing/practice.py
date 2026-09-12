@@ -1,31 +1,13 @@
 import cv2
+import numpy as np
 
-img = cv2.imread("cat.jpg")
-gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+img = cv2.imread("cat.jpg", 0)
 
-threshold_value,threshold = cv2.threshold(
-    gray,
-    150,
-    255,
-    cv2.THRESH_BINARY
-)
+kernel = np.ones((3,3), np.uint8)
 
-threshold_value,inv = cv2.threshold(
-    gray,
-    150,
-    255,
-    cv2.THRESH_BINARY_INV
-)
-threshold_value,trunc = cv2.threshold(
-    gray,
-    150,
-    255,
-    cv2.THRESH_TRUNC
-)
+erosion = cv2.erode(img, kernel, iterations=1)
 
-print(threshold_value)
-cv2.imshow("threhold image",threshold)
-cv2.imshow("myimage",gray)
-cv2.imshow("myimage inverse",inv)
-cv2.imshow("myimage trunc",trunc)
+cv2.imshow("Original", img)
+cv2.imshow("Erosion", erosion)
 cv2.waitKey(0)
+cv2.destroyAllWindows()

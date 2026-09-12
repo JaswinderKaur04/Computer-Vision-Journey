@@ -23,9 +23,9 @@ contours, hierarchy = cv2.findContours(
 cv2.drawContours(
     img,
     contours,
-    -1,
+    -1,                   #draw all contours
     (0, 255, 0),
-    2
+    2                     #Thickness of the contour line
 )
 # print(len(contours))
 cv2.imshow("Contours", img)
